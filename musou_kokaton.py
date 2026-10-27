@@ -487,11 +487,13 @@ def main():
                 if bomb.state == "inactive":
                     continue
                 # 通常状態時はゲームオーバー処理
-                bird.change_img(8, screen)  # こうかとん悲しみエフェクト
-                score.update(screen)
-                pg.display.update()
-                time.sleep(2)
-                return
+                life.num -= 1  # 残機数を1減算
+                if life.num <= 0:  # 残機数が0になったらゲームオーバー
+                    score.update(screen)
+                    life.update(screen)
+                    pg.display.update()
+                    time.sleep(2)
+                    return
 
 
         bird.update(key_lst, screen)
