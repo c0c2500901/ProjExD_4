@@ -418,7 +418,7 @@ def main():
     beams = pg.sprite.Group()
     exps = pg.sprite.Group()
     emys = pg.sprite.Group()
-    Shields = pg.sprite.Group()
+    shields = pg.sprite.Group()
     emp = None
 
     tmr = 0
@@ -441,6 +441,11 @@ def main():
                 if event.key == pg.K_e and score.value > 20:
                     score.value -= 20
                     emp = EMP(emys, bombs, screen)
+
+                if event.key == pg.K_s and score.value >= 0 and len(shields) == 0:
+                    shields.add(Shield(bird, 400))
+                    score.value -= 50
+                    print("hoge")
 
 
         screen.blit(bg_img, [0, 0])
@@ -500,6 +505,8 @@ def main():
         exps.draw(screen)
         score.update(screen)
         life.update(screen)  # ライフ（ハート）の描画更新
+        shields.update()
+        shields.draw(screen)
         
         if emp is not None:
             emp.update(screen)
